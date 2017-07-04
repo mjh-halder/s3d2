@@ -1,0 +1,19 @@
+{
+  "name": "blockchain-s3d",
+  "version": "0.0.1",
+  "description": "Secure 3D Printing Business Network",
+  "scripts": {
+      "prepublish": "mkdirp ./dist && composer archive create --sourceType dir --sourceName . -a ./dist/my-network.bna",
+      "pretest": "npm run lint",
+      "lint": "eslint .",
+      "postlint": "npm run licchk",
+      "licchk": "license-check",
+      "postlicchk": "npm run doc",
+      "doc": "jsdoc --pedantic --recurse -c jsdoc.conf",
+      "test-inner": "mocha --recursive && cucumber-js",
+      "test-cover": "nyc npm run test-inner",
+      "test": "mocha --recursive -t 4000"
+    },
+  "author": "Michael Halder",
+  "license": "Apache-2.0"
+}

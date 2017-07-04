@@ -1,0 +1,41 @@
+/**
+ * Secure 3D Print V1.0
+ */
+
+namespace org.acme.printingNetwork
+
+asset PrintingLicense identified by print_license_id {
+  o String print_license_id
+  o Integer print_limit
+  --> Actor owner
+}
+
+abstract participant Actor identified by actor_id {
+  o String actor_id
+  o String name
+}
+
+participant Producer extends Actor {
+}
+
+participant Licensor extends Actor {
+}
+
+abstract transaction LicenseTransaction identified by transaction_id {
+  o String transaction_id
+}
+
+transaction LicenseTransmission extends LicenseTransaction  {
+  --> PrintingLicense printing_license
+  --> Actor new_owner
+}
+
+transaction LicenseCreation extends LicenseTransaction {
+  o String print_license_id
+  o Integer print_limit
+  --> Actor owner
+}
+
+transaction LicenseUtilisation extends LicenseTransaction {
+  --> PrintingLicense printing_license
+}
